@@ -13,6 +13,9 @@ local downloaded = {}
 local addedtolist = {}
 local abortgrab = false
 
+local imdb_id = string.match(item_value, "^[a-z]+0*([1-9][0-9]+)$")
+print(imdb_id)
+
 for ignore in io.open("ignore-list", "r"):lines() do
   downloaded[ignore] = true
 end
@@ -51,7 +54,8 @@ allowed = function(url, parenturl)
   end]]
 
   for s in string.gmatch(url, "([a-z][a-z][0-9]+)") do
-    if s == item_value then
+    local id = string.match(s, "^[a-z]+0*([1-9][0-9]+)$")
+    if id == imdb_id then
       if string.match(item_type, "board") and string.match(url, "/board/") then
         return true
       elseif not string.match(item_type, "board") then
