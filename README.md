@@ -1,7 +1,7 @@
-flickr-grab
+imdb-grab
 =============
 
-More information about the archiving project can be found on the ArchiveTeam wiki: [flickr](http://archiveteam.org/index.php?title=flickr)
+More information about the archiving project can be found on the ArchiveTeam wiki: [IMDb](http://archiveteam.org/index.php?title=IMDb)
 
 Setup instructions
 =========================
@@ -15,7 +15,7 @@ In most of the below cases, there will be a web interface running at http://loca
 Running with a warrior
 -------------------------
 
-Follow the [instructions on the ArchiveTeam wiki](http://archiveteam.org/index.php?title=Warrior) for installing the Warrior, and select the "flickr" project in the Warrior interface.
+Follow the [instructions on the ArchiveTeam wiki](http://archiveteam.org/index.php?title=Warrior) for installing the Warrior, and select the "IMDb" project in the Warrior interface.
 
 Running without a warrior
 -------------------------
@@ -58,8 +58,8 @@ Distribution-specific setup
     adduser --system --group --shell /bin/bash archiveteam
     apt-get update && apt-get install -y git-core libgnutls-dev lua5.1 liblua5.1-0 liblua5.1-0-dev screen python-dev python-pip bzip2 zlib1g-dev flex autoconf
     pip install --upgrade seesaw
-    su -c "cd /home/archiveteam; git clone https://github.com/ArchiveTeam/flickr-grab.git; cd flickr-grab; ./get-wget-lua.sh" archiveteam
-    screen su -c "cd /home/archiveteam/flickr-grab/; run-pipeline pipeline.py --concurrent 2 --address '127.0.0.1' YOURNICKHERE" archiveteam
+    su -c "cd /home/archiveteam; git clone https://github.com/ArchiveTeam/imdb-grab.git; cd imdb-grab; ./get-wget-lua.sh" archiveteam
+    screen su -c "cd /home/archiveteam/imdb-grab/; run-pipeline pipeline.py --concurrent 2 --address '127.0.0.1' YOURNICKHERE" archiveteam
     [... ctrl+A D to detach ...]
 
 In __Debian Jessie__, the `libgnutls-dev` package was renamed to `libgnutls28-dev`. So, you need to do the following instead:
@@ -92,7 +92,7 @@ You need Homebrew. Ensure that you have the OS X equivalent of bzip2 installed a
     pip install --upgrade seesaw
     [... pretty much the same as above ...]
 
-**There is a known issue with some packaged versions of rsync. If you get errors during the upload stage, flickr-grab will not work with your rsync version.**
+**There is a known issue with some packaged versions of rsync. If you get errors during the upload stage, imdb-grab will not work with your rsync version.**
 
 This supposedly fixes it:
 
@@ -107,7 +107,7 @@ Ensure that you have the Arch equivalent of bzip2 installed as well.
 3. Run `pip2 install --upgrade seesaw`.
 4. Modify the run-pipeline script in seesaw to point at `#!/usr/bin/python2` instead of `#!/usr/bin/python`.
 5. `useradd --system --group users --shell /bin/bash --create-home archiveteam`
-6. `screen su -c "cd /home/archiveteam/flickr-grab/; run-pipeline pipeline.py --concurrent 2 --address '127.0.0.1' YOURNICKHERE" archiveteam`
+6. `screen su -c "cd /home/archiveteam/imdb-grab/; run-pipeline pipeline.py --concurrent 2 --address '127.0.0.1' YOURNICKHERE" archiveteam`
 
 ### For FreeBSD:
 
@@ -154,4 +154,4 @@ Are you a developer? Help write code for us! Look at our [developer documentatio
 
 ### Other problems
 
-Have an issue not listed here? Join us on IRC and ask! We can be found at irc.efnet.org #flickrfckr.
+Have an issue not listed here? Join us on IRC and ask! We can be found at irc.efnet.org #imdbgone.
