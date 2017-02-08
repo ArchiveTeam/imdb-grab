@@ -58,7 +58,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20170208.01"
+VERSION = "20170208.02"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'imdb'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -203,16 +203,15 @@ class WgetArgs(object):
             wget_args.append('http://www.imdb.com/title/{item_value}/'.format(**locals()))
             #wget_args.append('http://m.imdb.com/title/{item_value}/'.format(**locals()))
         elif item_type == 'title_board':
-            num = int(item_value)
-            for i in range(len(item_value), 9):
-                new_item_value = 'tt' + str(num).zfill(i)
-                wget_args.extend(["--warc-header", "imdb-board-title: " + new_item_value])
-                wget_args.append('http://www.imdb.com/title/{new_item_value}/'.format(**locals()))
-                wget_args.append('http://www.imdb.com/title/{new_item_value}/board/'.format(**locals()))
-                wget_args.append('http://www.imdb.com/title/{new_item_value}/board/?ref_=tt_bd_sm'.format(**locals()))
-                #wget_args.append('http://m.imdb.com/title/{new_item_value}/'.format(**locals()))
-                #wget_args.append('http://m.imdb.com/title/{new_item_value}/board/'.format(**locals()))
-                #wget_args.append('http://m.imdb.com/title/{new_item_value}/board/?ref_=tt_bd_sm'.format(**locals()))
+            new_item_value = 'tt' + item_value.zfill(7)
+            wget_args.extend(["--warc-header", "imdb-board-title: " + new_item_value])
+            wget_args.extend(["--warc-header", "imdb-board-title-id: " + item_value])
+            wget_args.append('http://www.imdb.com/title/{new_item_value}/'.format(**locals()))
+            wget_args.append('http://www.imdb.com/title/{new_item_value}/board/'.format(**locals()))
+            wget_args.append('http://www.imdb.com/title/{new_item_value}/board/?ref_=tt_bd_sm'.format(**locals()))
+            #wget_args.append('http://m.imdb.com/title/{new_item_value}/'.format(**locals()))
+            #wget_args.append('http://m.imdb.com/title/{new_item_value}/board/'.format(**locals()))
+            #wget_args.append('http://m.imdb.com/title/{new_item_value}/board/?ref_=tt_bd_sm'.format(**locals()))
         else:
             raise Exception('Unknown item')
 
