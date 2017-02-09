@@ -44,11 +44,11 @@ allowed = function(url, parenturl)
     return false
   end
 
-  --[[if string.match(url, "/nest/")
+  if string.match(url, "/nest/")
      or string.match(url, "/inline/")
      or string.match(url, "/flat/") then
     return false
-  end]]
+  end
 
   for s in string.gmatch(url, "([a-z][a-z][0-9]+)") do
     local id = string.match(s, "^[a-z]+0*([1-9][0-9]+)$")
