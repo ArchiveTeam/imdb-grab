@@ -46,7 +46,8 @@ allowed = function(url, parenturl)
 
   if string.match(url, "/nest/")
      or string.match(url, "/inline/")
-     or string.match(url, "/flat/") then
+     or string.match(url, "/flat/") 
+     or string.match(url, "[?&]d=") then
     return false
   end
 
