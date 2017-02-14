@@ -13,8 +13,19 @@ local downloaded = {}
 local addedtolist = {}
 local abortgrab = false
 
+local ids = {}
+
 for ignore in io.open("ignore-list", "r"):lines() do
   downloaded[ignore] = true
+end
+
+if string.match(item_value, "%-") then
+  start, end_ = string.match(item_value, "([0-9]+)%-([0-9]+)")
+  for i=start, end_ do
+    ids[i] = true
+  end
+else
+  ids[tonumber(item_value)] = true
 end
 
 load_json_file = function(file)
@@ -52,7 +63,7 @@ allowed = function(url, parenturl)
 
   for s in string.gmatch(url, "([a-z][a-z][0-9]+)") do
     local id = string.match(s, "^[a-z]+0*([1-9][0-9]+)$")
-    if id == item_value then
+    if ids[tonumber(id)] == true then
       if string.match(item_type, "board") and string.match(url, "/board/") then
         return true
       elseif not string.match(item_type, "board") then

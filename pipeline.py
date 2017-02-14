@@ -58,7 +58,7 @@ if not WGET_LUA:
 #
 # Update this each time you make a non-cosmetic change.
 # It will be added to the WARC files and reported to the tracker.
-VERSION = "20170209.03"
+VERSION = "20170214.01"
 USER_AGENT = 'ArchiveTeam'
 TRACKER_ID = 'imdb'
 TRACKER_HOST = 'tracker.archiveteam.org'
@@ -212,6 +212,15 @@ class WgetArgs(object):
             #wget_args.append('http://m.imdb.com/title/{new_item_value}/'.format(**locals()))
             #wget_args.append('http://m.imdb.com/title/{new_item_value}/board/'.format(**locals()))
             #wget_args.append('http://m.imdb.com/title/{new_item_value}/board/?ref_=tt_bd_sm'.format(**locals()))
+        elif item_type == '10_name_boards':
+            start, stop = item_value.split('-')
+            for i in range(int(start), int(stop)+1):
+                new_item_value = 'nm' + str(i).zfill(7)
+                wget_args.extend(["--warc-header", "imdb-board-name: " + new_item_value])
+                wget_args.extend(["--warc-header", "imdb-board-name-id: " + str(i)])
+                wget_args.append('http://www.imdb.com/name/{new_item_value}/'.format(**locals()))
+                wget_args.append('http://www.imdb.com/name/{new_item_value}/board/'.format(**locals()))
+                wget_args.append('http://www.imdb.com/name/{new_item_value}/board/?ref_=tt_bd_sm'.format(**locals()))
         else:
             raise Exception('Unknown item')
 
