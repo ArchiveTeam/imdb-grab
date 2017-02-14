@@ -62,7 +62,7 @@ allowed = function(url, parenturl)
   end
 
   for s in string.gmatch(url, "([a-z][a-z][0-9]+)") do
-    local id = string.match(s, "^[a-z]+0*([1-9][0-9]+)$")
+    local id = string.match(s, "^[a-z]+0*([1-9][0-9]*)$")
     if ids[tonumber(id)] == true then
       if string.match(item_type, "board") and string.match(url, "/board/") then
         return true
